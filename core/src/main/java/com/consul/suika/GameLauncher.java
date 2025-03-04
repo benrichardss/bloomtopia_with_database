@@ -4,10 +4,11 @@ import com.badlogic.gdx.ApplicationListener;
 
 public class GameLauncher implements ApplicationListener{
     private  MyGame game;
+    private DatabaseService databaseService;
 
     @Override
     public void create() {
-        game = new MyGame();
+        game = new MyGame(databaseService);
         game.create(); // This sets the initial screen
     }
 

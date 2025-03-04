@@ -12,6 +12,7 @@ public class AndroidLauncher extends AndroidApplication {
         super.onCreate(savedInstanceState);
         AndroidApplicationConfiguration configuration = new AndroidApplicationConfiguration();
         configuration.useImmersiveMode = true; // Recommended, but not required.
-        initialize(new MyGame(), configuration);
+        AndroidDatabaseService databaseService = new AndroidDatabaseService(this);
+        initialize(new MyGame(databaseService), configuration);
     }
 }

@@ -40,9 +40,11 @@ import java.util.Arrays;
 public class GameScreen implements Screen {
 
     private Game game;
+    private DatabaseService databaseService;
 
-    public GameScreen(Game game) {
+    public GameScreen(Game game, DatabaseService databaseService) {
         this.game = game;
+        this.databaseService = databaseService;
     }
 
 
@@ -334,7 +336,7 @@ public class GameScreen implements Screen {
                 Gdx.app.log("quitButton", "Button clicked");
                 isMusicPlaying=false;
                 music.pause();
-                game.setScreen(new FirstScreen(game));
+                game.setScreen(new FirstScreen(game, databaseService));
             }
         });
 
@@ -434,7 +436,7 @@ public class GameScreen implements Screen {
                 isMusicPlaying=false;
                 music.pause();
 
-                game.setScreen(new bloombastic(game));
+                game.setScreen(new bloombastic(game, databaseService));
             }
         });
 

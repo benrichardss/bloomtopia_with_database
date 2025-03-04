@@ -28,13 +28,15 @@ public class UsernameScreen implements Screen {
     private Texture background;
     private FitViewport viewport;
     private Game game; // Use Game instead of FirstScreen
+    private DatabaseService databaseService;
 
     // Texture for the next button and transparent background
     private Texture nextButtonTexture;
     private Texture transparentTexture;
 
-    public UsernameScreen(Game game) { // Accept Game instance
+    public UsernameScreen(Game game, DatabaseService databaseService) { // Accept Game instance
         this.game = game;
+        this.databaseService = databaseService;
     }
 
     @Override
@@ -73,8 +75,10 @@ public class UsernameScreen implements Screen {
                     dialog.button("OK");
                     dialog.show(stage);
                 } else {
+                    long playerId = databaseService.insertPlayer(username);
+                    System.out.println("Player inserted with ID: " + playerId);
                     // Transition directly to GameScreen and pass the username
-                    GameScreen gameScreen = new GameScreen(game);
+                    GameScreen gameScreen = new GameScreen(game, databaseService);
                     //gameScreen.setUsername(username);  // Assumes GameScreen has setUsername()
                     game.setScreen(gameScreen);          // Switch to GameScreen
                 }

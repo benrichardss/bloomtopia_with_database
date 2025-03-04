@@ -25,9 +25,11 @@ import java.util.Map;
 public class bloombastic implements Screen {
 
     private Game game;
+    private DatabaseService databaseService;
 
-    public bloombastic(Game game) {
+    public bloombastic(Game game, DatabaseService databaseService) {
         this.game = game;
+        this.databaseService = databaseService;
     }
 
 
@@ -296,7 +298,7 @@ public class bloombastic implements Screen {
 
                 if (Gdx.input.justTouched()) {
                     if (exitButtonSprite.getBoundingRectangle().contains(touchPos.x, touchPos.y)) {
-                        game.setScreen(new FirstScreen(game));
+                        game.setScreen(new FirstScreen(game, databaseService));
                     }
                 }
 

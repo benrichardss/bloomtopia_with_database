@@ -37,6 +37,7 @@ public class FirstScreen implements Screen {
     private Texture mainMenuExitTexture;private TextureRegion mainMenuExitTextureRegion;private TextureRegionDrawable mainMenuExitTextureRegionDrawable;private ImageButton mainMenuExitButton;
 
     private Game game;
+    private DatabaseService databaseService;
 
     private SpriteBatch menuBatch;
 
@@ -66,12 +67,9 @@ public class FirstScreen implements Screen {
     private Music mainMenuMusic;
     private Sound mainMenuButtonSound,gameSelectSound;
 
-
-
-
-    public FirstScreen(Game game) {
+    public FirstScreen(Game game, DatabaseService databaseService) {
         this.game = game;
-
+        this.databaseService = databaseService;
     }
 
     public void setUsername(String username) {
@@ -217,7 +215,7 @@ public class FirstScreen implements Screen {
                 Gdx.app.log("mainMenuPlayButton", "Play Button clicked");
                 mainMenuButtonSound.play();
                 Gdx.input.setInputProcessor(gamemodeStage);
-                game.setScreen(new UsernameScreen(game)); // Pass the Game instance
+                game.setScreen(new UsernameScreen(game, databaseService)); // Pass the Game instance
             }
         });
 
@@ -240,7 +238,7 @@ public class FirstScreen implements Screen {
                 inGameMode=false;
                 inMainMenu=false;
                 mainMenuMusic.pause();
-                game.setScreen(new GameScreen(game));
+                game.setScreen(new GameScreen(game, databaseService));
             }
         });
 
@@ -259,7 +257,7 @@ public class FirstScreen implements Screen {
                     Gdx.app.log("Debug", "Switching to Bloombastic");
                 }
 
-                game.setScreen(new bloombastic(game));
+                game.setScreen(new bloombastic(game, databaseService));
             }
         });
 
